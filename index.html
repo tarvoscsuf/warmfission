@@ -105,17 +105,24 @@
 
       const randomTypingTime = Math.random() * 2000; // Random time between 0 to 2 seconds
       setTimeout(() => {
-        // Generate a random number of "pika"s
-        const pikaCount = Math.floor(Math.random() * 5) + 1;
+        // Define the options
+        const options = ["pika", "pikipi", "piika", "pikapi"];
+
+        // Generate a random response length (between 1 and 10 words)
+        const responseLength = Math.floor(Math.random() * 10) + 1;
+
+        // Generate the response
+        let response = '';
+        for (let i = 0; i < responseLength; i++) {
+          const randomWord = options[Math.floor(Math.random() * options.length)];
+          response += randomWord + ' ';
+        }
 
         // Generate a random punctuation mark
         const punctuation = ['?', '!', '.'][Math.floor(Math.random() * 3)];
 
-        // Construct the response
-        const response = `Pika${' pika'.repeat(pikaCount)}${punctuation}`;
-
         // Display the response
-        const botMessage = '<li class="message bot-message">' + response + '</li>';
+        const botMessage = '<li class="message bot-message">' + response.trim() + punctuation + '</li>';
         messages.innerHTML += botMessage;
 
         // Clear input field
