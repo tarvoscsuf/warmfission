@@ -5,86 +5,22 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    .chat-box {
-      width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
+    /* ... (your existing styles) ... */
 
-    .messages {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .message {
-      margin-bottom: 10px;
-      overflow: auto;
-    }
-
-    .user-message, .bot-message {
-      border-radius: 5px;
-      padding: 10px;
-      max-width: 70%;
-    }
-
-    .user-message {
-      background-color: #007aff;
-      color: #fff;
-      float: right;
-      clear: both;
-    }
-
-    .bot-message {
-      background-color: #28a745;
-      color: #fff;
-      float: left;
-      clear: both;
-    }
-
-    input[type="text"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin: 0;
-      font-size: 16px;
-      box-sizing: border-box;
-      outline: none;
-    }
-
-    .send-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 2px;
-      padding: 0px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      float: right;
-    }
-
-    h1 {
+    .loading-message {
+      color: #888;
       text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="chat-box">
-    <h1>Pikachu ChatGPT</h1>
-
-    <ul class="messages" id="messages">
-      <li class="message bot-message">Pika pika!</li>
-    </ul>
-
-    <div style="clear: both;"></div>
+    <!-- ... (your existing content) ... -->
 
     <input type="text" id="prompt" placeholder="Enter a prompt...">
-    <button id="generate" class="send-button">Generate</button>
+    <button id="generate" class="send-button" disabled>Generate</button>
 
+    <div class="loading-message" id="loading-message" style="display:none;">Pikachu is typing...</div>
   </div>
 
   <script>
@@ -94,22 +30,36 @@
       const userMessage = '<li class="message user-message">' + prompt + '</li>';
       messages.innerHTML += userMessage;
 
-      // Generate a random number of "pika"s
-      const pikaCount = Math.floor(Math.random() * 5) + 1;
+      const loadingMessage = document.getElementById('loading-message');
+      loadingMessage.style.display = 'block';
 
-      // Generate a random punctuation mark
-      const punctuation = ['?', '!', '.'][Math.floor(Math.random() * 3)];
+      const randomTypingTime = Math.random() * 2000; // Random time between 0 to 2 seconds
+      setTimeout(() => {
+        // Generate a random number of "pika"s
+        const pikaCount = Math.floor(Math.random() * 5) + 1;
 
-      // Construct the response
-      const response = `Pika${' pika'.repeat(pikaCount)}${punctuation}`;
+        // Generate a random punctuation mark
+        const punctuation = ['?', '!', '.'][Math.floor(Math.random() * 3)];
 
-      // Display the response
-      const botMessage = '<li class="message bot-message">' + response + '</li>';
-      messages.innerHTML += botMessage;
+        // Construct the response
+        const response = `Pika${' pika'.repeat(pikaCount)}${punctuation}`;
 
-      // Clear input field
-      document.getElementById('prompt').value = '';
+        // Display the response
+        const botMessage = '<li class="message bot-message">' + response + '</li>';
+        messages.innerHTML += botMessage;
+
+        // Clear input field
+        document.getElementById('prompt').value = '';
+
+        loadingMessage.style.display = 'none';
+      }, randomTypingTime);
     };
+
+    const promptInput = document.getElementById('prompt');
+    promptInput.addEventListener('input', () => {
+      const generateButton = document.getElementById('generate');
+      generateButton.disabled = promptInput.value === '';
+    });
 
     document.getElementById('generate').addEventListener('click', generateResponse);
   </script>
