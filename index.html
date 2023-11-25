@@ -1,151 +1,259 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-
-  <title>PikaGPT</title>
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    .chat-box {
-      width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .messages {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .message {
-      margin-bottom: 10px;
-      overflow: auto;
-    }
-
-    .user-message, .bot-message {
-      border-radius: 5px;
-      padding: 10px;
-      max-width: 70%;
-    }
-
-    .user-message {
-      background-color: #007aff;
-      color: #fff;
-      float: right;
-      clear: both;
-    }
-
-    .bot-message {
-      background-color: #28a745;
-      color: #fff;
-      float: left;
-      clear: both;
-    }
-
-    input[type="text"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin: 0;
-      font-size: 16px;
-      box-sizing: border-box;
-      outline: none;
-    }
-
-    .send-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 2px;
-      padding: 0px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      float: right;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    .loading-message {
-      color: #888;
-      text-align: center;
-    }
-
-    body {
-      font-family: 'Raleway', sans-serif; /* Set the font to Raleway */
-    }
-  </style>
-</head>
-<body>
-  <div class="chat-box">
-    <h1>Pikachu ChatGPT</h1>
-
-    <ul class="messages" id="messages">
-      <li class="message bot-message">Pika pika!</li>
-    </ul>
-
-    <div style="clear: both;"></div>
-
-    <input type="text" id="prompt" placeholder="Enter a prompt...">
-    <button id="generate" class="send-button" disabled>Generate</button>
-
-    <div class="loading-message" id="loading-message" style="display:none;">Pikachu is typing...</div>
-  </div>
-
-  <script>
-    const generateResponse = () => {
-      const prompt = document.getElementById('prompt').value;
-      const messages = document.getElementById("messages");
-      const userMessage = '<li class="message user-message">' + prompt + '</li>';
-      messages.innerHTML += userMessage;
-
-      const loadingMessage = document.getElementById('loading-message');
-      loadingMessage.style.display = 'block';
-
-      const randomTypingTime = Math.random() * 2000; // Random time between 0 to 2 seconds
-      setTimeout(() => {
-        // Define the options
-        const options = ["pika", "pikipi", "piika", "pikapi"];
-
-        // Generate a random response length (between 1 and 10 words)
-        const responseLength = Math.floor(Math.random() * 10) + 1;
-
-        // Generate the response
-        let response = '';
-        for (let i = 0; i < responseLength; i++) {
-          const randomWord = options[Math.floor(Math.random() * options.length)];
-          response += randomWord + ' ';
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        // Generate a random punctuation mark
-        const punctuation = ['?', '!', '.'][Math.floor(Math.random() * 3)];
+        body {
+            font-family: Arial, sans-serif;
+            background-color: ##f1f1f1;
+        }
 
-        // Display the response
-        const botMessage = '<li class="message bot-message">' + response.trim() + punctuation + '</li>';
-        messages.innerHTML += botMessage;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        // Clear input field
-        document.getElementById('prompt').value = '';
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #040406;
+            height: 60px;
+        }
 
-        loadingMessage.style.display = 'none';
-      }, randomTypingTime);
-    };
+        .navbar-logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
 
-    const promptInput = document.getElementById('prompt');
-    promptInput.addEventListener('input', () => {
-      const generateButton = document.getElementById('generate');
-      generateButton.disabled = promptInput.value === '';
-    });
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
 
-    document.getElementById('generate').addEventListener('click', generateResponse);
-  </script>
+        .navbar-menu li {
+            margin: 0 10px;
+        }
 
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-menu a:hover {
+            color: #3268F0;
+        }
+
+        .module {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+
+        .module-image {
+            width: 100%;
+            height: 600px;
+            object-fit: contain;
+        }
+
+        .module-content {
+            width: 60%;
+            padding: 20px;
+        }
+
+        .module-title {
+            color: #040406;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .module-text {
+            color: #333333;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .module-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0015FA;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .module-button:hover {
+            background-color: #3268F0;
+        }
+
+        @media (max-width: 768px) {
+            .module {
+                flex-direction: column;
+            }
+
+            .module-image {
+                height: 200px;
+            }
+        }
+
+        .gallery {
+            position: relative;
+        }
+
+        .gallery-slides {
+            display: none;
+        }
+
+        .gallery-slides.active {
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .gallery-prev, .gallery-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #0015FA;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            background: none;
+        }
+
+        .gallery-prev {
+            left: 0;
+        }
+
+        .gallery-next {
+            right: 0px;
+        }
+
+        .gallery-prev:hover, .gallery-next:hover {
+            color: #3268F0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-logo">WarmFission</div>
+            <ul class="navbar-menu">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="module">
+            <div class="gallery">
+                <div class="gallery-slides active">
+                    <img src="app_image_1.jpg" alt="App Success Case" class="module-image">
+                    <div class="gallery-caption">Victory!</div>
+                </div>
+                <div class="gallery-slides">
+                    <img src="app_image_2.jpg" alt="App Fail case" class="module-image">
+                    <div class="gallery-caption">Loss!</div>
+                </div>
+                <div class="gallery-slides">
+                    <img src="app_image_3.jpg" alt="App Example" class="module-image">
+                    <div class="gallery-caption">Prototype</div>
+                </div>
+                <button class="gallery-prev" onclick="changeSlide(-1)">❮</button>
+                <button class="gallery-next" onclick="changeSlide(1)">❯</button>
+            </div>
+            <div class="module-content">
+                <h1 class="module-title">Unraveler</h1>
+                <p class="module-text">Unraveler is a word-guessing hangman-styled game that gives the user five tries to guess what correct letters belong on a secret phrase. Made natively in Swift, Unraveler is made for iOS 14+ devices, and contains most of the latest terminologies from </p>
+                <a href="app_link" class="module-button">Download Now</a>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-content">
+                <h1 class="module-title">Non-Volatile Stock Historical & Predicted Trendset</h1>
+                <p class="module-text">This summer research project focused on using historical stock trends, charting graphs from them, and analyzing if any patterns occur. Two stocks in the same industry were observed, and if one had experienced high volatility on a specified date, we then can analyze if it was due to market conditions or an external effect on the business.</p>
+                <a href="https://drive.google.com/drive/folders/1emr_Q5P2YWrGCo9nYP2oIQL5pg-EKUq9?usp=sharing" class="module-button" target="_blank">View Portfolio</a>
+            </div>
+            <div class="gallery portfolio-gallery">
+                <div class="portfolio-slides active">
+                    <img src="trendset_1.jpg" alt="Portfolio Image 1" class="module-image">
+                    <div class="gallery-caption">Project 1</div>
+                </div>
+                <div class="portfolio-slides">
+                    <img src="trendset_2.jpg" alt="Portfolio Image 2" class="module-image">
+                    <div class="gallery-caption">Project 2</div>
+                </div>
+                <div class="portfolio-slides">
+                    <img src="trendset_3.jpg" alt="Portfolio Image 3" class="module-image">
+                    <div class="gallery-caption">Project 3</div>
+                </div>
+                <button class="gallery-prev" onclick="changePortfolioSlide(-1)">❮</button>
+                <button class="gallery-next" onclick="changePortfolioSlide(1)">❯</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var slides = document.getElementsByClassName("gallery-slides");
+        var slideIndex = 0;
+        showSlide(slideIndex);
+
+        function changeSlide(n) {
+            slideIndex += n;
+            showSlide(slideIndex);
+        }
+
+        function showSlide(n) {
+            if (n >= slides.length) {
+                slideIndex = 0;
+            }
+            if (n < 0) {
+                slideIndex = slides.length - 1;
+            }
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+
+        var portfolioSlides = document.getElementsByClassName("portfolio-slides");
+        var portfolioSlideIndex = 0;
+        showPortfolioSlide(portfolioSlideIndex);
+
+        function changePortfolioSlide(n) {
+            portfolioSlideIndex += n;
+            showPortfolioSlide(portfolioSlideIndex);
+        }
+
+        function showPortfolioSlide(n) {
+            if (n >= portfolioSlides.length) {
+                portfolioSlideIndex = 0;
+            }
+            if (n < 0) {
+                portfolioSlideIndex = portfolioSlides.length - 1;
+            }
+            for (var i = 0; i < portfolioSlides.length; i++) {
+                portfolioSlides[i].style.display = "none";
+            }
+            portfolioSlides[portfolioSlideIndex].style.display = "block";
+        }
+    </script>
 </body>
 </html>
