@@ -34,29 +34,29 @@
             font-weight: bold;
         }
 
-        .navbar-logo img {
-            height: 100%;
-            max-height: 40px;
-            margin-left: 10px;
-        }
+            .navbar-logo img {
+                height: 100%;
+                max-height: 40px;
+                margin-left: 10px;
+            }
 
         .navbar-menu {
             display: flex;
             list-style: none;
         }
 
-        .navbar-menu li {
-            margin: 0 10px;
-        }
+            .navbar-menu li {
+                margin: 0 10px;
+            }
 
-        .navbar-menu a {
-            color: white;
-            text-decoration: none;
-        }
+            .navbar-menu a {
+                color: white;
+                text-decoration: none;
+            }
 
-        .navbar-menu a:hover {
-            color: #3268F0;
-        }
+                .navbar-menu a:hover {
+                    color: #3268F0;
+                }
 
         .module {
             display: flex;
@@ -98,9 +98,9 @@
             margin-top: 20px;
         }
 
-        .module-button:hover {
-            background-color: #3268F0;
-        }
+            .module-button:hover {
+                background-color: #3268F0;
+            }
 
         @media (max-width: 768px) {
             .module {
@@ -120,9 +120,9 @@
             display: none;
         }
 
-        .gallery-slides.active {
-            display: block;
-        }
+            .gallery-slides.active {
+                display: block;
+            }
 
         .gallery-caption {
             position: absolute;
@@ -156,9 +156,9 @@
             right: 0px;
         }
 
-        .gallery-prev:hover, .gallery-next:hover {
-            color: #3268F0;
-        }
+            .gallery-prev:hover, .gallery-next:hover {
+                color: #3268F0;
+            }
     </style>
 </head>
 <body>
@@ -172,6 +172,7 @@
                 <li><a href="Contact.html">Contact</a></li>
             </ul>
         </div>
+
         <div class="module">
             <div class="gallery">
                 <div class="gallery-slides active">
@@ -195,6 +196,7 @@
                 <a href="app_link" class="module-button">Download Now</a>
             </div>
         </div>
+
         <div class="module">
             <div class="module-content">
                 <h1 class="module-title">Non-Volatile Stock Historical & Predicted Trendset</h1>
@@ -218,6 +220,31 @@
                 <button class="gallery-next" onclick="changePortfolioSlide(1)">❯</button>
             </div>
         </div>
+
+        <div class="module">
+            <div class="gallery light-gallery">
+                <div class="light-slides active">
+                    <img src="lightmirror1.png" alt="Software Preview" class="module-image">
+                    <div class="gallery-caption">Software Preview</div>
+                </div>
+                <div class="light-slides">
+                    <img src="lightmirror2.png" alt="RSS Feed Changing" class="module-image">
+                    <div class="gallery-caption">RSS Feed Changing</div>
+                </div>
+                <div class="light-slides">
+                    <img src="lightmirror3.jpg" alt="LightMirror shown on monitor" class="module-image">
+                    <div class="gallery-caption">LightMirror shown on monitor</div>
+                </div>
+                <button class="gallery-prev" onclick="changeLightSlide(-1)">❮</button>
+                <button class="gallery-next" onclick="changeLightSlide(1)">❯</button>
+            </div>
+            <div class="module-content">
+                <h1 class="module-title">LightMirror</h1>
+                <p class="module-text">This Python program was made to act as a lightweight alternatie to MichMich's MagicMirror, to be used on low-powered devices. It works by displaying the New York Times RSS feed, the local weather from OpenWeather API, and the time. LightMirror also has the capability to display a randomly generated greeting to the user if a funded OpenAI account is provided.</p>
+                <a href="https://github.com/tarvoscsuf/LightMirror" class="module-button" target="_blank">View Github</a>
+            </div>
+        </div>
+
     </div>
     <script>
         var slides = document.getElementsByClassName("gallery-slides");
@@ -262,6 +289,28 @@
                 portfolioSlides[i].style.display = "none";
             }
             portfolioSlides[portfolioSlideIndex].style.display = "block";
+        }
+
+        var lightSlides = document.getElementsByClassName("light-slides");
+        var lightSlideIndex = 0;
+        showLightSlide(lightSlideIndex);
+
+        function changeLightSlide(n) {
+            lightSlideIndex += n;
+            showLightSlide(lightSlideIndex);
+        }
+
+        function showLightSlide(n) {
+            if (n >= lightSlides.length) {
+                lightSlideIndex = 0;
+            }
+            if (n < 0) {
+                lightSlideIndex = lightSlides.length - 1;
+            }
+            for (var i = 0; i < lightSlides.length; i++) {
+                lightSlides[i].style.display = "none";
+            }
+            lightSlides[lightSlideIndex].style.display = "block";
         }
     </script>
 </body>
