@@ -28,9 +28,17 @@
         }
 
         .navbar-logo {
+            display: flex;
+            align-items: center;
             color: white;
             font-size: 24px;
             font-weight: bold;
+        }
+
+        .navbar-logo img {
+            height: 100%;
+            max-height: 40px;
+            margin-right: 10px;
         }
 
         .navbar-menu {
@@ -91,7 +99,10 @@
 <body>
     <div class="container">
         <div class="navbar">
-            <div class="navbar-logo">WarmFission</div>
+            <div class="navbar-logo">
+                <img src="jeanfissionsmall.png" alt="Logo">
+                WarmFission
+            </div>
             <ul class="navbar-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="AboutMe.html">About Me</a></li>
