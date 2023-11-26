@@ -1,69 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - About Me</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            background-color: #f8f8f8;
-            color: #333;
         }
 
-        header {
-            text-align: center;
-            padding: 50px 0;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
         }
 
-        header img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        section {
-            max-width: 800px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: -50px;
-            border-radius: 5px;
         }
 
-        h2 {
-            color: #333;
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #040406;
+            height: 60px;
+            padding: 0 20px;
         }
 
-        p {
-            line-height: 1.6;
+        .navbar-logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar-menu li {
+            margin: 0 10px;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar-menu a:hover {
+            color: #3268F0;
+        }
+
+        .module {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+
+        .module-image {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .module-content {
+            width: 60%;
+            padding: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .module-title {
+            color: #040406;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .module-text {
+            color: #333333;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .module-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0015FA;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .module-button:hover {
+            background-color: #3268F0;
+        }
+
+        @media (max-width: 768px) {
+            .module {
+                flex-direction: column;
+            }
+
+            .module-image {
+                height: 200px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-logo">WarmFission</div>
+            <ul class="navbar-menu">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        
+        <section class="module">
+            <header>
+                <img src="me.jpg" alt="Image of Me" class="module-image">
+            </header>
+    
+            <div class="module-content">
+                <h2>Introduction</h2>
+                <p>
+                    Hello, I am Sebastian Rodriguez! I am currently a student attending California State University, Fullerton. I am a senior in standing and I am studying Computer Science.
+                </p>
+        
+                <h2>Professional Background</h2>
+                <p>
+                    I'm a business-focused CS student currently trying to break into the world of Product Management. Currently, I am reading, taking online courses, and reaching out to community forums in search of advice and self-growth. 
+                </p>
+            </div>
+        </section>
 
-    <header>
-        <img src="your-image.jpg" alt="Your Name">
-    </header>
-
-    <section>
-        <h2>Introduction</h2>
-        <p>
-            Hello! I'm [Your Name], a passionate [Your Profession] based in [Your Location]. 
-            I specialize in [Your Expertise] and have a deep interest in [Your Interests].
-        </p>
-
-        <h2>Professional Background</h2>
-        <p>
-            With [Number] years of experience in the field, I have [specific achievements or projects].
-            My goal is to [Your Goal or Mission] and contribute to [relevant industry/community goals].
-        </p>
-    </section>
-
+    </div>
 </body>
 </html>
